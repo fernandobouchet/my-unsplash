@@ -1,7 +1,12 @@
+import { Dispatch, SetStateAction } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import logo from '../assets/my_unsplash_logo.svg';
 
-const Header = () => {
+type Props = {
+  setShow: Dispatch<SetStateAction<boolean>>;
+};
+
+const Header: React.FC<Props> = ({ setShow }) => {
   return (
     <header className="d-flex justify-content-between">
       <img src={logo} />
@@ -10,7 +15,11 @@ const Header = () => {
           <Form.Label></Form.Label>
           <Form.Control type="email" placeholder="Search by name" />
         </Form.Group>
-        <Button variant="success" type="submit" className="ms-auto my-auto">
+        <Button
+          variant="success"
+          className="ms-auto my-auto"
+          onClick={() => setShow(true)}
+        >
           Add a photo
         </Button>
       </Form>
