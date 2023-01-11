@@ -10,13 +10,27 @@ interface image {
 const uploadImage = async (imageData: image) => {
   try {
     const result = await axios.post(`${API_URL}`, imageData);
-    console.log(result);
     if (result.status === 200) {
-      return result;
+      return result.data;
+    } else {
+      console.log('Unknow error');
     }
   } catch (error) {
     console.log(error);
   }
 };
 
-export { uploadImage };
+const getImages: any = async () => {
+  try {
+    const result = await axios.get(`${API_URL}`);
+    if (result.status === 200) {
+      return result.data;
+    } else {
+      console.log('Unknow error');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { uploadImage, getImages };

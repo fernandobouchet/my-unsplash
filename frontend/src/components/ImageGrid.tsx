@@ -1,33 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { getImages } from '../services/imagesServices';
 import ImageCard from './ImageCard';
 
-const initialImages = [
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=222',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/200/300?image=206',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/300/300?image=203',
-];
-
 const ImageGrid = () => {
-  const [images, setImages] = useState(initialImages);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    getImages().then((result: []) => setImages(result));
+  }, []);
 
   return (
-    <ResponsiveMasonry
-      columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
-      className="mt-5"
-    >
-      <Masonry gutter="2rem">
-        {images.map((image, i) => (
-          <ImageCard key={i} src={image} />
-        ))}
-      </Masonry>
-    </ResponsiveMasonry>
+    <>
+      {images && (
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+          className="mt-5"
+        >
+          <Masonry gutter="2rem">
+            {images.map((image: any) => (
+              <ImageCard key={image._id} image={image} />
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      )}
+    </>
   );
 };
 export default ImageGrid;
