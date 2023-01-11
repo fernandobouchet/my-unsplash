@@ -6,6 +6,9 @@ class Image {
 
   @prop()
   url: string;
+
+  @prop({ default: Date.now() })
+  createdAt: Date;
 }
 
 const imageModel = getModelForClass(Image);

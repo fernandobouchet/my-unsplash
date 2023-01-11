@@ -3,36 +3,18 @@ import imageModel from '../models/imageModel';
 
 const getImages = async (req: Request, res: Response) => {
   try {
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
+    const qs = require('qs');
+    const skip = parseInt(qs.parse(req.query.skip).skip || 0);
+    const limit = parseInt(qs.parse(req.query.limit).limit || 9);
 
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
-
-    const results = {
-      previous: {},
-      next: {},
-      data: {},
-    };
-
-    const images = await imageModel.find({});
-
-    if (startIndex > 0) {
-      results.previous = {
-        page: page - 1,
-        limit: limit,
-      };
-    }
-    if (endIndex < images.length) {
-      results.next = {
-        page: page + 1,
-        limit: limit,
-      };
-    }
-
-    results.data = images.slice(startIndex, endIndex);
-
-    res.status(200).send(results);
+    await imageModel
+      .find()
+      .skip(skip)
+      .limit(limit)
+      .sort('-createdAt')
+      .then((items) => {
+        res.status(200).send(items);
+      });
   } catch (error) {
     console.log(error);
     res.status(500).send('Error retrieving images');
