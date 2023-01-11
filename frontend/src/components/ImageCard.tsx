@@ -1,6 +1,6 @@
-type Props = {
+interface Props {
   src: string;
-};
+}
 
 const ImageCard: React.FC<Props> = ({ src }) => {
   return (

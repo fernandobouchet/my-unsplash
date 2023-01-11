@@ -5,7 +5,7 @@ import ImageGrid from '../components/ImageGrid';
 import { useState } from 'react';
 
 const MainPage = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState<boolean>(false);
 
   return (
     <Container>

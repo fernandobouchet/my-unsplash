@@ -1,11 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Modal, Form } from 'react-bootstrap';
 
-type Props = {
+interface Props {
   show: boolean;
-  setShow: Dispatch<SetStateAction<boolean>>;
-};
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const AddImageModal: React.FC<Props> = ({ show, setShow }) => {
   return (

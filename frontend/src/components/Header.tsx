@@ -1,10 +1,9 @@
-import { Dispatch, SetStateAction } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import logo from '../assets/my_unsplash_logo.svg';
 
-type Props = {
-  setShow: Dispatch<SetStateAction<boolean>>;
-};
+interface Props {
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const Header: React.FC<Props> = ({ setShow }) => {
   return (
