@@ -39,7 +39,9 @@ const getImages = async (req: Request, res: Response) => {
   }
 };
 
-const getImagesByLabel = async (req: Request, res: Response) => {};
+const getImagesByLabel = async (req: Request, res: Response) => {
+  res.send(req.body);
+};
 
 const postImage = async (req: Request, res: Response) => {
   try {
@@ -62,6 +64,8 @@ const postImage = async (req: Request, res: Response) => {
   }
 };
 
-const deleteImage = async (req: Request, res: Response) => {};
+const deleteImage = async (req: Request, res: Response) => {
+  res.send(req.body);
+};
 
 export { getImages, postImage, deleteImage, getImagesByLabel };
