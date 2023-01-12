@@ -20,7 +20,7 @@ const uploadImage = async (imageData: image) => {
   }
 };
 
-const getImages: any = async () => {
+const getImages = async () => {
   try {
     const result = await axios.get(`${API_URL}`);
     if (result.status === 200) {
@@ -33,4 +33,17 @@ const getImages: any = async () => {
   }
 };
 
-export { uploadImage, getImages };
+const deleteImage = async (id: string) => {
+  try {
+    const result = await axios.delete(`${API_URL}/${id}`);
+    if (result.status === 200) {
+      return result.data;
+    } else {
+      console.log('Unknow error');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { uploadImage, getImages, deleteImage };

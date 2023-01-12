@@ -30,7 +30,7 @@ const AddImageModal: React.FC<Props> = ({ show, setShow }) => {
   return (
     <>
       <Modal show={show} centered keyboard={false}>
-        <Modal.Header>
+        <Modal.Header className="border-0">
           <Modal.Title>Add a new photo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -58,7 +58,7 @@ const AddImageModal: React.FC<Props> = ({ show, setShow }) => {
                 onChange={handleImageData}
               />
             </Form.Group>
-            <Modal.Footer>
+            <Modal.Footer className="border-0">
               <Button variant="light" onClick={() => setShow(false)}>
                 Cancel
               </Button>
