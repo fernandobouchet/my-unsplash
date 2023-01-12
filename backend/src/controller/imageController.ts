@@ -47,7 +47,19 @@ const postImage = async (req: Request, res: Response) => {
 };
 
 const deleteImage = async (req: Request, res: Response) => {
-  res.send(req.body);
+  try {
+    const { id } = req.params;
+    const image = await imageModel.findById(id);
+    if (!image) {
+      res.status(404).send('Image not found');
+    } else {
+      await image.remove();
+      res.status(200).send('Image Deleted');
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
 };
 
 export { getImages, postImage, deleteImage, getImagesByLabel };
