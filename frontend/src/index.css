@@ -18,16 +18,6 @@
   transition: filter 0.3s ease-in-out;
 }
 
-.placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  height: 200px;
-}
-
 #search-icon-container {
   background-color: unset;
   border-right: 0;
