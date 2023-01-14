@@ -30,3 +30,13 @@
 #search_input {
   border-left: 0;
 }
+
+.spinner-container {
+  height: 15rem;
+}
+
+#spinner {
+  color: darkgrey;
+  width: 5rem;
+  height: 5rem;
+}

@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { useState } from 'react';
+import { Button, Card, Container, Spinner } from 'react-bootstrap';
+import imageIsLoaded from '../hooks/imageIsLoadedHook';
 import { deleteImage } from '../services/imagesServices';
 
 interface Props {
@@ -11,17 +12,8 @@ interface Props {
 }
 
 const ImageCard: React.FC<Props> = ({ image }) => {
+  const isLoaded = imageIsLoaded(image.url);
   const [hover, setHover] = useState(false);
-
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const newImage = new window.Image();
-    newImage.src = image.url;
-    newImage.onload = () => {
-      setIsLoaded(true);
-    };
-  }, [image]);
 
   const handleDelete = (id: string) => {
     deleteImage(id);
@@ -29,7 +21,7 @@ const ImageCard: React.FC<Props> = ({ image }) => {
 
   return (
     <>
-      {isLoaded && (
+      {isLoaded ? (
         <Card
           className="rounded-4"
           onMouseEnter={() => setHover(true)}
@@ -54,6 +46,10 @@ const ImageCard: React.FC<Props> = ({ image }) => {
             </Card.Text>
           </Card.Body>
         </Card>
+      ) : (
+        <Container className="d-flex justify-content-center align-items-center spinner-container">
+          <Spinner id="spinner" />
+        </Container>
       )}
     </>
   );
