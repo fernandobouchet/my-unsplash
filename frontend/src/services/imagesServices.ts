@@ -7,6 +7,10 @@ interface image {
   url?: string;
 }
 
+interface passwordInterface {
+  password?: string;
+}
+
 const uploadImage = async (imageData: image) => {
   try {
     const result = await axios.post(`${API_URL}`, imageData);
@@ -33,16 +37,20 @@ const getImages = async () => {
   }
 };
 
-const deleteImage = async (id: string) => {
+const deleteImage = async (id: string, password: passwordInterface) => {
   try {
-    const result = await axios.delete(`${API_URL}/${id}`);
+    const result = await axios.delete(`${API_URL}/${id}`, {
+      data: password,
+      headers: { 'Content-Type': 'application/json' },
+    });
     if (result.status === 200) {
-      return result.data;
+      return result;
     } else {
       console.log('Unknow error');
     }
   } catch (error) {
     console.log(error);
+    return error;
   }
 };
 

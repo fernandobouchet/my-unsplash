@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Card, Container, Spinner } from 'react-bootstrap';
 import imageIsLoaded from '../hooks/imageIsLoadedHook';
-import { deleteImage } from '../services/imagesServices';
+import DeleteImageModal from './DeleteImageModal';
 
 interface Props {
   image: {
@@ -13,11 +13,9 @@ interface Props {
 
 const ImageCard: React.FC<Props> = ({ image }) => {
   const isLoaded = imageIsLoaded(image.url);
-  const [hover, setHover] = useState(false);
 
-  const handleDelete = (id: string) => {
-    deleteImage(id);
-  };
+  const [hover, setHover] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
     <>
@@ -37,7 +35,7 @@ const ImageCard: React.FC<Props> = ({ image }) => {
           <Card.Body className={`cardBody ${hover ? 'show' : ''}`}>
             <Button
               variant="outline-danger rounded-4 ms-auto"
-              onClick={() => handleDelete(image._id)}
+              onClick={() => setShowDeleteModal(true)}
             >
               delete
             </Button>
@@ -50,6 +48,13 @@ const ImageCard: React.FC<Props> = ({ image }) => {
         <Container className="d-flex justify-content-center align-items-center spinner-container">
           <Spinner id="spinner" />
         </Container>
+      )}
+      {showDeleteModal && (
+        <DeleteImageModal
+          show={showDeleteModal}
+          setShow={setShowDeleteModal}
+          imageId={image._id}
+        />
       )}
     </>
   );
