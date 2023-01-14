@@ -48,13 +48,18 @@ const postImage = async (req: Request, res: Response) => {
 
 const deleteImage = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const image = await imageModel.findById(id);
-    if (!image) {
-      res.status(404).send('Image not found');
+    const { password } = req.body;
+    if (password === process.env.PASSWORD) {
+      const { id } = req.params;
+      const image = await imageModel.findById(id);
+      if (!image) {
+        res.status(404).send('Image not found');
+      } else {
+        await image.remove();
+        res.status(200).send('Image Deleted');
+      }
     } else {
-      await image.remove();
-      res.status(200).send('Image Deleted');
+      res.status(401).send('Wrong password');
     }
   } catch (error) {
     console.log(error);
