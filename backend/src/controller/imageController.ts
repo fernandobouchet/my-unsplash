@@ -1,6 +1,12 @@
 import { Request, Response } from 'express';
 import imageModel from '../models/imageModel';
 
+type imageType = {
+  label: string;
+  url: string;
+  createdAt: Date;
+};
+
 const getImages = async (req: Request, res: Response) => {
   try {
     const qs = require('qs');
@@ -22,7 +28,22 @@ const getImages = async (req: Request, res: Response) => {
 };
 
 const getImagesByLabel = async (req: Request, res: Response) => {
-  res.send(req.body);
+  const query = req.query.label;
+  try {
+    imageModel.find(
+      { label: { $regex: query, $options: 'i' } },
+      (err: Error, result: imageType | null) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.status(200).send(result);
+        }
+      }
+    );
+  } catch (error) {
+    res.status(500).send(error);
+  }
 };
 
 const postImage = async (req: Request, res: Response) => {

@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/', getImages);
 
-router.get('/images', getImagesByLabel);
+router.get('/search', getImagesByLabel);
 
 router.post('/', postImage);
 

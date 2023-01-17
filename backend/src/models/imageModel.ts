@@ -1,11 +1,11 @@
 import { getModelForClass, prop } from '@typegoose/typegoose';
 
 class Image {
-  @prop()
-  label: string;
+  @prop({ type: String, index: { unique: true, background: true } })
+  label: String;
 
   @prop()
-  url: string;
+  url: String;
 
   @prop({ default: Date.now() })
   createdAt: Date;
