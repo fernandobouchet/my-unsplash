@@ -20,6 +20,7 @@
 
 #search-icon-container {
   background-color: unset;
+  border: 1px solid lightgrey;
   border-right: 0;
 }
 

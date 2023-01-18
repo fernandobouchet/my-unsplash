@@ -1,15 +1,27 @@
+import React, { useRef } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import logo from '../assets/my_unsplash_logo.svg';
 import searchLogo from '../assets/search_logo.svg';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Header: React.FC<Props> = ({ setShow }) => {
+  const navigate = useNavigate();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSearch = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') navigate(`/search/${inputRef.current?.value}`);
+  };
+
   return (
     <header className="d-flex justify-content-between mt-4">
-      <img src={logo} />
+      <a href="/">
+        <img src={logo} />
+      </a>
       <div className="d-flex w-100 ms-3">
         <InputGroup id="input-group">
           <InputGroup.Text id="search-icon-container">
@@ -20,6 +32,8 @@ const Header: React.FC<Props> = ({ setShow }) => {
             type="text"
             placeholder="Search by name"
             aria-label="image name"
+            ref={inputRef}
+            onKeyDown={handleSearch}
           />
         </InputGroup>
         <Button

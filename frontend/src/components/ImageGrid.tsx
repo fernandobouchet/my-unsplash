@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import { getImages } from '../services/imagesServices';
 import ImageCard from './ImageCard';
 
-const ImageGrid = () => {
-  const [images, setImages] = useState([]);
+type Image = {
+  _id: String;
+  label: String;
+  url: String;
+};
 
-  useEffect(() => {
-    getImages().then((result: []) => setImages(result));
-  }, []);
+interface Props {
+  images: Image[];
+}
 
+const ImageGrid: React.FC<Props> = ({ images }) => {
   return (
     <>
       {images && (

@@ -37,6 +37,19 @@ const getImages = async () => {
   }
 };
 
+const getImagesByLabel = async (label: String) => {
+  try {
+    const result = await axios.get(`${API_URL}/search/?label=${label}`);
+    if (result.status === 200) {
+      return result.data;
+    } else {
+      console.log('Unknow error');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const deleteImage = async (id: string, password: passwordInterface) => {
   try {
     const result = await axios.delete(`${API_URL}/${id}`, {
@@ -54,4 +67,4 @@ const deleteImage = async (id: string, password: passwordInterface) => {
   }
 };
 
-export { uploadImage, getImages, deleteImage };
+export { uploadImage, getImages, deleteImage, getImagesByLabel };
