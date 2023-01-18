@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://my-unsplash-a2v6.onrender.com/api';
 
 interface image {
   label?: string;
