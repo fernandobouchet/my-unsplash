@@ -25,7 +25,7 @@ const Header: React.FC<Props> = ({ setShow }) => {
       <a href="/">
         <img src={logo} />
       </a>
-      <div className="d-flex w-100 ms-3">
+      <div className="d-flex w-100 ms-3" id="inputs-container">
         <InputGroup id="input-group">
           <InputGroup.Text id="search-icon-container">
             <img src={searchLogo} />
@@ -40,6 +40,7 @@ const Header: React.FC<Props> = ({ setShow }) => {
           />
         </InputGroup>
         <Button
+          id="add-photo-button"
           variant="success"
           className="ms-auto my-auto"
           onClick={() => setShow(true)}
