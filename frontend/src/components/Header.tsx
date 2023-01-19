@@ -14,7 +14,10 @@ const Header: React.FC<Props> = ({ setShow }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') navigate(`/search/${inputRef.current?.value}`);
+    const label = inputRef.current!.value;
+
+    if (e.key === 'Enter' && label && label.indexOf(' ') <= 0)
+      navigate(`/search/${label}`);
   };
 
   return (

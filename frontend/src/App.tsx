@@ -6,7 +6,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="/search/:label" element={<SearchPage />} />
+      <Route path="/search/:label?" element={<SearchPage />} />
     </Routes>
   );
 }
