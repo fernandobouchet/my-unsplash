@@ -1,3 +1,4 @@
+import { Container, Spinner } from 'react-bootstrap';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import ImageCard from './ImageCard';
 
@@ -14,7 +15,7 @@ interface Props {
 const ImageGrid: React.FC<Props> = ({ images }) => {
   return (
     <>
-      {images && (
+      {images.length >= 1 ? (
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
           className="mt-5"
@@ -25,6 +26,10 @@ const ImageGrid: React.FC<Props> = ({ images }) => {
             ))}
           </Masonry>
         </ResponsiveMasonry>
+      ) : (
+        <Container className="d-flex justify-content-center align-items-center main-spinner-container">
+          <Spinner id="main-spinner" />
+        </Container>
       )}
     </>
   );

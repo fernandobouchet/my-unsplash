@@ -36,10 +36,20 @@
   height: 15rem;
 }
 
+.main-spinner-container {
+  height: 40rem;
+}
+
 #spinner {
   color: darkgrey;
   width: 5rem;
   height: 5rem;
+}
+
+#main-spinner {
+  color: darkgrey;
+  width: 7rem;
+  height: 7rem;
 }
 
 @media (max-width: 767px) {
